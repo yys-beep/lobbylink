@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom'; // ADDED Navigate
 import { useAuth } from '../hooks/useAuth';
 
+
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

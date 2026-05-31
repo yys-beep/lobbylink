@@ -46,11 +46,11 @@ export default function Navbar() {
             <div className="w-9 h-9 bg-[#6366F1] rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.4)]">
               <span className="text-white font-extrabold text-lg">L</span>
             </div>
-            <span className="text-[#F9FAFB] font-bold text-xl tracking-tight">LobbyLink</span>
+            <span className="text-[#F9FAFB] font-bold text-xl tracking-tight hidden sm:block">LobbyLink</span>
           </Link>
 
           {currentUser && (
-            <div className="flex items-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-6">
               
               {/* NOTIFICATION BELL */}
               <div className="relative" ref={dropdownRef}>
@@ -72,7 +72,7 @@ export default function Navbar() {
 
                 {/* DROPDOWN PANEL */}
                 {showNotifs && (
-                  <div className="absolute right-0 mt-2 w-80 bg-[#111827] border border-gray-800 rounded-xl shadow-2xl py-2 z-50 overflow-hidden">
+                  <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-[#111827] border border-gray-800 rounded-xl shadow-2xl py-2 z-50 overflow-hidden">
                     <div className="px-4 py-2 border-b border-gray-800 flex justify-between items-center">
                       <h3 className="text-sm font-bold text-[#F9FAFB]">Notifications</h3>
                       <span className="text-xs text-[#9CA3AF] bg-gray-800 px-2 py-0.5 rounded-full">{notifications.length}</span>
@@ -100,13 +100,21 @@ export default function Navbar() {
                 )}
               </div>
               
-              <Link to="/profile" className="text-sm font-medium text-[#9CA3AF] hover:text-white transition-colors hidden sm:block border-l border-gray-800 pl-6">
-                Hi, <span className="text-[#F9FAFB]">{currentUser.displayName || 'User'}</span>
+              {/* RESPONSIVE PROFILE LINK */}
+              <Link to="/profile" className="flex items-center gap-2 group sm:border-l border-gray-800 sm:pl-6">
+                <div className="w-8 h-8 rounded-full bg-[#6366F1] text-white flex items-center justify-center font-bold text-sm shadow-sm group-hover:ring-2 ring-indigo-400 transition-all">
+                  {currentUser.displayName?.charAt(0).toUpperCase() || 'U'}
+                </div>
+                <span className="hidden sm:block text-sm font-medium text-[#9CA3AF] group-hover:text-white transition-colors">
+                  Hi, <span className="text-[#F9FAFB]">{currentUser.displayName || 'User'}</span>
+                </span>
               </Link>
               
-              <div className="flex items-center gap-3">
-                <Link to="/create" className="text-sm font-medium text-white bg-[#6366F1] px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors shadow-sm hidden sm:block">
-                  Create Group
+              {/* RESPONSIVE ACTIONS */}
+              <div className="flex items-center gap-2 sm:gap-3 ml-1">
+                <Link to="/create" className="text-sm font-medium text-white bg-[#6366F1] px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-500 transition-colors shadow-sm flex items-center justify-center">
+                  <span className="sm:hidden text-lg leading-none font-bold">+</span>
+                  <span className="hidden sm:block">Create Group</span>
                 </Link>
                 <button onClick={handleLogout} className="text-sm font-medium text-[#9CA3AF] hover:text-[#EF4444] transition-colors px-2 py-1.5 rounded-lg">
                   Logout

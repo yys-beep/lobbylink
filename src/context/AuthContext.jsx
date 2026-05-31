@@ -32,9 +32,9 @@ export function AuthProvider({ children }) {
   }
 
   async function updateUserPassword(newPassword) {
-  if (!auth.currentUser) throw new Error("No user logged in.");
-  return updatePassword(auth.currentUser, newPassword);
-}
+    if (!auth.currentUser) throw new Error("No user logged in.");
+    return updatePassword(auth.currentUser, newPassword);
+  }
 
   // ADDED: Live Database Profile Mutation Function
   async function updateProfileName(name) {
