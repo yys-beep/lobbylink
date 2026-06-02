@@ -83,16 +83,16 @@ export default function GroupChat({ groupId, currentUser, group, isOwner }) {
       
       {/* Pinned Announcement Banner */}
       {group.pinnedMessage && (
-        <div className="bg-[#F59E0B]/10 border-b border-[#F59E0B]/30 p-3 flex justify-between items-center">
-          <div className="flex items-center gap-2 overflow-hidden">
+        <div className="bg-[#F59E0B]/10 border-b border-[#F59E0B]/30 p-3 flex justify-between items-center text-left">
+          <div className="flex items-center gap-3 overflow-hidden">
             <span className="text-xl">📌</span>
             <div className="truncate">
-              <p className="text-xs font-bold text-[#F59E0B] uppercase tracking-wider">Pinned by {group.pinnedMessage.author}</p>
+              <p className="text-[10px] font-bold text-[#F59E0B] uppercase tracking-wider mb-0.5">Pinned by {group.pinnedMessage.author}</p>
               <p className="text-sm text-[#F9FAFB] truncate">{group.pinnedMessage.text}</p>
             </div>
           </div>
           {isOwner && (
-            <button onClick={() => setPinnedMessage(groupId, null, null)} className="text-gray-500 hover:text-white px-2">✕</button>
+            <button onClick={() => setPinnedMessage(groupId, null, null)} className="text-gray-500 hover:text-white px-2 ml-2 shrink-0">✕</button>
           )}
         </div>
       )}
@@ -110,7 +110,14 @@ export default function GroupChat({ groupId, currentUser, group, isOwner }) {
           return (
             <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'} group`}>
               <div className="flex items-center gap-2 mb-1 px-1">
-                {isOwner && !isMe && <button onClick={() => handlePin(msg)} className="text-[10px] text-gray-600 hover:text-[#F59E0B] opacity-0 group-hover:opacity-100 transition-opacity">PIN</button>}
+                {isOwner && !isMe && (
+                  <button 
+                    onClick={() => handlePin(msg)} 
+                    className="text-[10px] font-bold text-[#F59E0B] bg-[#F59E0B]/10 px-1.5 py-0.5 rounded hover:bg-[#F59E0B] hover:text-white transition-colors"
+                  >
+                    PIN
+                  </button>
+                )}
                 <span className="text-[10px] text-[#9CA3AF]">{isMe ? 'You' : msg.displayName}</span>
               </div>
               <div className={`px-4 py-2 rounded-2xl max-w-[80%] text-sm ${isMe ? 'bg-[#6366F1] text-white rounded-tr-none' : 'bg-gray-800 text-[#F9FAFB] rounded-tl-none'}`}>
